@@ -1,9 +1,10 @@
 <?php
 
 /**
- * Adding our frameworks to the Panels variant form... this should really be
- * dependent on the panels module being on. Also it doesn't actually do anything
- * yet, so we should probably @TODO that.
+ * Adding our frameworks to the Panels variant form.
+ *
+ * This should really be dependent on the panels module being on. Also it
+ * doesn't actually do anything yet, so we should probably @TODO that.
  */
 function pdb_form_page_variant_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   $presentations = array(
@@ -11,7 +12,7 @@ function pdb_form_page_variant_edit_form_alter(&$form, \Drupal\Core\Form\FormSta
   );
   $overrides = \Drupal::moduleHandler()->invokeAll('pdb_presentations', $presentations);
 
-  $presentations +=  $overrides;
+  $presentations += $overrides;
 
   $form['presentation'] = array(
     '#title' => t('Presentation'),

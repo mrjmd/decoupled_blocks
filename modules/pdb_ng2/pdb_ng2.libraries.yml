@@ -1,13 +1,53 @@
-angular2:
-  version: VERSION
-  js:
-    assets/vendor/ng2/system.js: {}
-    assets/vendor/ng2/angular2.min.js: {}
-    assets/vendor/ng2/angular2-polyfills.js: {}
-    assets/vendor/ng2/http.min.js: {}
-    assets/vendor/ng2/Rx.js: {}
-    assets/vendor/ng2/typescript.js: {}
-    assets/app/systemConfig.js: {}
+pdb.ng2.system:
+  remote: https://github.com/angular/angular.js
+  version: 1.4.4
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  js: //code.angularjs.org/tools/system.js: { type: external, minified: true }
+pdb.ng2.typescript:
+  remote: https://github.com/angular/angular.js
+  version: 1.4.4
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  js: //code.angularjs.org/tools/typescript.js: : { type: external, minified: true }
+pdb.ng2.angular2:
+  remote: https://github.com/angular/angular.js
+  version: 1.4.4
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  js: //code.angularjs.org/2.0.0-beta.16/angular2.min.js: : { type: external, minified: true }
+pdb.ng2.angular-polyfills:
+  remote: https://github.com/angular/angular.js
+  version: 1.4.4
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  js: //code.angularjs.org/2.0.0-beta.16/angular2-polyfills.min.js: : { type: external, minified: true }
+pdb.ng2.http:
+  remote: https://github.com/angular/angular.js
+  version: 1.4.4
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  js: //code.angularjs.org/2.0.0-beta.16/http.min.js: {}: { type: external, minified: true }
+pdb.ng2.rx:
+  remote: https://github.com/angular/angular.js
+  version: 1.4.4
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  js: //code.angularjs.org/2.0.0-beta.16/Rx.min.js: {}
+pdb.ng2.config:
+  js: assets/app/systemConfig.js: {}
   dependencies:
     - core/drupal
     - core/drupalSettings

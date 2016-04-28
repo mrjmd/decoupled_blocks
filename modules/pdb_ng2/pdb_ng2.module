@@ -1,13 +1,67 @@
 <?php
 
 /**
+ * Implements hook_pdb_markup_override().
+ *
+ * Specify our custom markup for ng2 blocks.
+ */
+function pdb_ng2_pdb_markup_override($component, $return) {
+  $info = $component['info'];
+  // Only override if presentation if ng2.
+  if ($info['presentation'] == 'ng2') {
+    // @TODO Find a better place for the stupid <app></app>... this
+    // will add it for every block which is dumb. Ultimately we don't want
+    // to need it at all.
+    $return['ng2'] = '<app></app><' . $info['machine_name'] . '></' . $info['machine_name'] . '>';
+  }
+  return $return;
+}
+
+/**
+ * Implements hook_pdb_settings().
+ *
+ * Specify our custom drupalSettings for ng2 blocks.
+ */
+function pdb_ng2_pdb_settings($component, $settings) {
+  $info = $component['info'];
+  // Only override if presentation if ng2.
+  if ($info['presentation'] == 'ng2') {
+    if (!isset($settings['apps'])) {
+      $settings['apps'] = array();
+    }
+    $settings['apps'][$info['machine_name']] = array(
+      'uri' => $info['path'],
+    );
+  }
+  return $settings;
+}
+
+/**
+ * Implements hook_pdb_libraries().
+ *
+ * Specify our custom library for ng2 blocks.
+ */
+function pdb_ng2_pdb_libraries($component, $libraries) {
+  $info = $component['info'];
+  // Only override if presentation if ng2.
+  if ($info['presentation'] == 'ng2') {
+    if (!isset($libraries['pdb_ng2/angular2'])) {
+      $libraries += array(
+        'pdb_ng2/angular2',
+      );
+    }
+  }
+  return $libraries;
+}
+
+/**
  * Implements hook_pdb_presentations().
  *
  * Specify our custom drupalSettings for ng2 blocks.
  */
 function pdb_ng2_pdb_presentations() {
   $presentations = array(
-    'ng2' => 'Angular 2'
+    'ng2' => 'Angular 2',
   );
   return $presentations;
 }

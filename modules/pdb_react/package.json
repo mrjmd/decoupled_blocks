@@ -1,0 +1,12 @@
+{
+  "name": "pdb_react",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "react" : "0.14.7"
+  },
+  "devDependencies": {
+    "concurrently": "^2.0.0",
+    "lite-server": "^2.2.0"
+  }
+}

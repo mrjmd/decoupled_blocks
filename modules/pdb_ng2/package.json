@@ -1,0 +1,18 @@
+{
+  "name": "pdb_ng2",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "angular2": "2.0.0-beta.14",
+    "es6-shim": "^0.35.0",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
+    "zone.js": "0.6.6",
+    "system": "1.0.4",
+    "typescript": "1.7.3"
+  },
+  "devDependencies": {
+    "concurrently": "^2.0.0",
+    "lite-server": "^2.2.0"
+  }
+}

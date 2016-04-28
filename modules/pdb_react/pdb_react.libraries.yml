@@ -1,8 +1,8 @@
 react:
   version: VERSION
   js:
-    assets/vendor/react/react.js: {}
-    assets/vendor/react/react-dom.js: {}
+    node_mdodules/react/dist/react.min.js: {}
+    node_modules/react/lib/react-dom.js: {}
   dependencies:
     - core/drupal
     - core/drupalSettings
