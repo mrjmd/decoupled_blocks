@@ -35,6 +35,12 @@
     // Loop through each object and conduct a merge.
     for (; i < length; i++) {
       var obj = arguments[i];
+      // add base url prefix to map
+      if (obj) {
+        for (var key in obj.map) {
+            obj.map[key] = drupalSettings.path.baseUrl + obj.map[key];
+        }
+      }
       merge(obj);
     }
 
@@ -50,7 +56,7 @@
     },
     // Map tells the System loader where to look for things.
     map: {
-      app: '/modules/pdb/modules/pdb_ng2/assets/app'
+      app: 'modules/pdb/modules/pdb_ng2/assets/app'
     },
     // Packages defines our app package.
     packages: {

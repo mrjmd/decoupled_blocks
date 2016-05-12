@@ -10,7 +10,7 @@ presentation: ng2
 settings:
   SystemJS:
     map:
-      ng2-file-upload: '/libraries/ng2-file-upload'
+      ng2-file-upload: 'libraries/ng2-file-upload'
     packages:
       ng2-file-upload:
         main: ng2-file-upload

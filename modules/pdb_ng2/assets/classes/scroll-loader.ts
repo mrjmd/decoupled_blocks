@@ -5,11 +5,15 @@
  * - Load components on demand when a compnent element is scolled, resized or
  *   orientationchanged into view.
  */
-import {Renderer,ElementRef, ApplicationRef, DynamicComponentLoader, Injector, provide, platform, PACKAGE_ROOT_URL} from "angular2/core";
+import {Renderer,ElementRef, ApplicationRef, DynamicComponentLoader, Injector, provide, platform, enableProdMode, PACKAGE_ROOT_URL} from "angular2/core";
 import {APP_COMPONENT_REF_PROMISE} from "angular2/src/core/application_tokens";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/fromEvent";
 import "rxjs/add/operator/debounceTime";
+
+if (drupalSettings.pdb.configuration.development_mode === 0) {
+  enableProdMode();
+}
 
 export class ScrollLoader {
   app: any[];
