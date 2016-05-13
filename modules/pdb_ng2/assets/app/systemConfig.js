@@ -50,7 +50,7 @@
     },
     // Map tells the System loader where to look for things.
     map: {
-      app: '/modules/pdb/modules/pdb_ng2/assets/app'
+      app: drupalSettings.path.baseUrl + 'modules/pdb/modules/pdb_ng2/assets/app'
     },
     // Packages defines our app package.
     packages: {
