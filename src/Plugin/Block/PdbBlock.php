@@ -80,7 +80,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
     if (isset($this->configuration['pdb_configuration'])) {
       // @todo Is there anything else unique to key off of besides uuid
       $attached['drupalSettings']['pdb']['configuration'][$this->configuration['uuid']] = $this->configuration['pdb_configuration'];
-    }  
+    }
     return array(
       '#attached' => $attached,
     );
