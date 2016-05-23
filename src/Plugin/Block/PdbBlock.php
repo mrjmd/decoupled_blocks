@@ -46,6 +46,7 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    */
   public function build() {
     $component = $this->getComponentInfo();
+    $config_settings = \Drupal::config('pdb_ng2.settings');
     $this->configuration['uuid'] = \Drupal::service('uuid')->generate();
 
     $attached = array();
@@ -72,6 +73,9 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
 
     if ($contexts = $this->getContexts()) {
       $attached['drupalSettings']['pdb']['contexts'] = $this->getJsContexts($contexts);
+    }
+    if (isset($config_settings)) {
+      $attached['drupalSettings']['pdb']['configuration']['development_mode'] = $config_settings->get('development_mode');
     }
     if (isset($this->configuration['pdb_configuration'])) {
       // @todo Is there anything else unique to key off of besides uuid

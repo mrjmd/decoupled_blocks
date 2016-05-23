@@ -1,0 +1,10 @@
+pdb_ng2.admin_settings:
+  title: 'PDB Angular2'
+  description: 'Configure PDB NG2 Settings'
+  route_name: pdb_ng2.form
+  parent: 'system.admin_config_services'
+pdb.admin_settings_link:
+  title: 'PDB Angular2'
+  description: 'Configure PDB NG2 Settings'
+  route_name: pdb_ng2.form
+  menu_name: services
