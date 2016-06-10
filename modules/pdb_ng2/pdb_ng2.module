@@ -24,12 +24,5 @@ function pdb_ng2_component_info_alter($components) {
       }
       $component->info['path'] = $component->getPath() . '/component.' . $ext;
     }
-    else {
-      $path = $component->info['path'];
-      if ($path{0} != '/') {
-        $component->info['path'] = $component->getPath() . '/' . $path;
-      }
-    }
-
   }
 }
