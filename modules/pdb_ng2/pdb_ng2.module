@@ -12,17 +12,20 @@
  * @param object $components
  */
 function pdb_ng2_component_info_alter($components) {
+  // Use js or ts sourcing depending on development mode.
+  $extension = (1 === \Drupal::config('pdb_ng2.settings')->get('development_mode')) ?
+    'ts' : 'js';
   // Read info files for each module.
   foreach ($components as $key => $component) {
-    // Set component path if it hasn't been hardcoded.
-    if ($component->info['presentation'] == 'ng2' && empty($component->info['path'])) {
-      // Use js or ts sourcing depending on development mode.
-      $config_settings = \Drupal::config('pdb_ng2.settings');
-      $ext = 'js';
-      if (isset($config_settings) && $config_settings->get('development_mode')) {
-        $ext = 'ts';
+    // Check only NG2 presentations.
+    if ($component->info['presentation'] == 'ng2') {
+      // Check if path isn't defined.
+      if(empty($component->info['path'])) {
+        // Setup path based on component and default "component" as file name.
+        $component->info['path'] = $component->getPath() . '/component';
       }
-      $component->info['path'] = $component->getPath() . '/component.' . $ext;
+      // Setup component extension based on development mode.
+      $component->info['path'] = $component->info['path'] . '.' . $extension;
     }
   }
 }
