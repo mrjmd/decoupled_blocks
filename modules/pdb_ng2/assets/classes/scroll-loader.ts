@@ -95,8 +95,8 @@ export class ScrollLoader {
       let el = document.getElementById(id);
 
       if (el && this.elementInViewport(el)) {
-        // assuming if innerHTML is empty module has not been loaded
-        if (el.innerHTML.length === 0) {
+        // Check if element has ngComponentLoaded class.
+        if (!el.classList.contains('ngComponentLoaded')) {
           let elementName = this.components[id]["element"];
           let ngClassName = this.convertToNgClassName(elementName);
           let selector = "#" + id;
@@ -142,6 +142,7 @@ export class ScrollLoader {
     var componentResolver: ComponentResolver = app.injector.get(ComponentResolver);
     return componentResolver.resolveComponent(component).then((cf : ComponentFactory) =>
     {
+      document.getElementById(selector.substring(1)).classList.add('ngComponentLoaded');
       cf.selector = selector;
       return app.bootstrap(cf);
     });
