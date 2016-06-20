@@ -239,7 +239,8 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
    */
   protected function createElementsFromConfiguration($configuration, FormStateInterface $form_state) {
     $elements = [];
-    $defaults = $this->configuration['pdb_configuration'];
+    $defaults = (!empty($this->configuration['pdb_configuration'])) ?
+      $this->configuration['pdb_configuration'] : [];
     foreach ($configuration as $key => $setting) {
       $element = [];
       foreach ($setting as $property_key => $property) {

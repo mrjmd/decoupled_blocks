@@ -39,4 +39,4 @@ pdb.ng2.config:
     - core/drupalSettings
     - pdb_ng2/pdb.ng2.core
     - pdb_ng2/pdb.ng2.typescript
-    - pdn_ng2/pdb.ng2.rx
+    - pdb_ng2/pdb.ng2.rx
