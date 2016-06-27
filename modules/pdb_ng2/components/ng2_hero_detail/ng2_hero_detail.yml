@@ -1,9 +1,0 @@
-name: NG2 Hero Detail
-machine_name: ng2-hero-detail
-type: pdb
-description: 'NG 2 Hero Detail'
-package: NG2
-version: '1.0.0'
-core: '8.x'
-module_status: active
-presentation: ng2

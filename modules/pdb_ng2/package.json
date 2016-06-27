@@ -1,6 +1,6 @@
 {
   "name": "pdb_ng2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Decoupled Blocks Angular 2 dependencies",
   "repository": {
     "type": "git",
@@ -19,12 +19,13 @@
     "typings": "typings"
   },
   "dependencies": {
-    "@angular/common": "2.0.0-rc.1",
-    "@angular/compiler": "2.0.0-rc.1",
-    "@angular/core": "2.0.0-rc.1",
-    "@angular/http": "2.0.0-rc.1",
-    "@angular/platform-browser": "2.0.0-rc.1",
-    "@angular/platform-browser-dynamic": "2.0.0-rc.1",
+    "@angular/common": "2.0.0-rc.3",
+    "@angular/compiler": "github:angular/compiler-builds",
+    "@angular/compiler-cli": "github:angular/compiler-cli-builds",
+    "@angular/core": "2.0.0-rc.3",
+    "@angular/http": "2.0.0-rc.3",
+    "@angular/platform-browser": "2.0.0-rc.3",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.3",
     "core-js": "2.4.0",
     "systemjs": "0.19.27",
     "es6-shim": "^0.35.0",
@@ -34,7 +35,12 @@
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
-    "typescript": "^1.8.10",
+    "@angular/platform-server": "github:angular/platform-server-builds",
+    "del": "^2.2.1",
+    "gulp": "^3.9.1",
+    "reflect-metadata": "0.1.3",
+    "systemjs-builder": "^0.15.23",
+    "typescript": "^1.9.0-dev.20160624-1.0",
     "jasmine-core": "~2.4.1"
   }
 }

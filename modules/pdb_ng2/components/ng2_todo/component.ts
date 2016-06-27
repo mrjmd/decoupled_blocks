@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
-import {TodoStore, Todo} from './services/store.ts';
+import {TodoStore, Todo} from './services/store';
 
 @Component({
+    moduleId: __moduleName,
     selector: 'ng2-todo',
-    templateUrl: Drupal.url(drupalSettings.pdb.ng2.module_path + '/components/ng2_todo/template.html'),
-    styleUrls: [Drupal.url(drupalSettings.pdb.ng2.module_path + '/components/ng2_todo/style.css')],
+    templateUrl: 'template.html',
+    styleUrls: ['style.css'],
     providers: [TodoStore]
 })
 export class Ng2Todo {

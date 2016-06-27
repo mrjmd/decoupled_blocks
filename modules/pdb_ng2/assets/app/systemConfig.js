@@ -59,9 +59,13 @@
   var map = {
     'app': modulePath + '/assets/app',
     'classes': modulePath + '/assets/classes',
+    'components': modulePath + '/components',
     '@angular': modulePath + '/node_modules/@angular',
-    'rxjs': modulePath + '/node_modules/rxjs',
-    'primeng': modulePath + '/node_modules/primeng'
+    'rxjs/*': modulePath + '/node_modules/rxjs/bundles/Rx.umd.js'
+  };
+
+  var paths = {
+    'rxjs/*': modulePath + '/node_modules/rxjs/bundles/Rx.umd.js'
   };
 
   var packages = {
@@ -72,7 +76,11 @@
     classes: {
       defaultExtension: ext
     },
+    components: {
+      defaultExtension: ext
+    },
     rxjs: {
+      main: 'bundles/Rx.umd.js',
       defaultExtension: 'js'
     }
   };
@@ -84,7 +92,6 @@
     'http',
     'platform-browser',
     'platform-browser-dynamic',
-    'router',
     'router-deprecated',
     'upgrade'
   ];
@@ -93,7 +100,7 @@
   ngPackageNames.forEach(function (pkgName) {
     // Bundled version (fewer requests).
     packages['@angular/' + pkgName] = {
-      main: pkgName + '.umd.js',
+      main: 'bundles/' + pkgName + '.umd.js',
       defaultExtension: 'js'
     };
   });
@@ -107,7 +114,8 @@
     },
     // Packages defines our app package.
     packages: packages,
-    map: map
+    map: map,
+    paths: paths
   };
 
   if ('SystemJS' in drupalSettings) {

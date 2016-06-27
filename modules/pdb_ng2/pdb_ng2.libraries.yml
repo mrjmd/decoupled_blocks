@@ -21,16 +21,6 @@ pdb.ng2.typescript:
   js:
     node_modules/typescript/lib/typescript.js: { minified: true }
 
-pdb.ng2.rx:
-  remote: https://github.com/angular/angular.js
-  version: 2.0.0-rc.1
-  license:
-    name: MIT
-    url: https://github.com/angular/angular.js/blob/master/LICENSE
-    gpl-compatible: true
-  js:
-    node_modules/rxjs/Rx.js: { minified: false }
-
 pdb.ng2.config:
   js:
     assets/app/systemConfig.js: {}
@@ -39,4 +29,3 @@ pdb.ng2.config:
     - core/drupalSettings
     - pdb_ng2/pdb.ng2.core
     - pdb_ng2/pdb.ng2.typescript
-    - pdb_ng2/pdb.ng2.rx

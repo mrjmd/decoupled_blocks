@@ -95,12 +95,14 @@ export class ScrollLoader {
       let el = document.getElementById(id);
 
       if (el && this.elementInViewport(el)) {
-        // Check if element has ngComponentLoaded class.
-        if (!el.classList.contains('ngComponentLoaded')) {
-          let elementName = this.components[id]["element"];
-          let ngClassName = this.convertToNgClassName(elementName);
-          let selector = "#" + id;
-          this.bootstrapComponent(id, ngClassName, selector);
+
+          // Check if element has ngComponentLoaded class.
+          if (!el.classList.contains('ngComponentLoaded')) {
+          // Define ngClassName based on component settings or build default ngClassName based on element value.
+          let ngClassName = (typeof this.components[id]["ngClassName"] === 'string') ?
+              this.components[id]["ngClassName"] : this.convertToNgClassName(this.components[id]["element"]);
+          // bootstrap component.
+          this.bootstrapComponent(id, ngClassName, "#" + id);
         }
       }
     });
