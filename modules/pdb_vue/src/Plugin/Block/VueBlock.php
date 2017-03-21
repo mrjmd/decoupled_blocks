@@ -3,6 +3,7 @@
 namespace Drupal\pdb_vue\Plugin\Block;
 
 use Drupal\pdb\Plugin\Block\PdbBlock;
+use Drupal\pdb_vue\Render\VueMarkup;
 
 /**
  * Exposes a Vue component as a block.
@@ -21,20 +22,15 @@ class VueBlock extends PdbBlock {
   public function build() {
     $info = $this->getComponentInfo();
     $machine_name = $info['machine_name'];
+    $template = '';
 
-    $build = parent::build();
-
-    // User raw HTML if a template is provided
+    // Use raw HTML if a template is provided
     if (!empty($info['template'])) {
       $template = file_get_contents($info['path'] . '/' . $info['template']);
+    }
 
-      $build['#type'] = 'inline_template';
-      $build['#template'] = '{% raw %}<div class="' . $machine_name . '">' . $template . '</div>{% endraw %}';
-    }
-    else {
-      $build['#allowed_tags'] = array($machine_name);
-      $build['#markup'] = '<' . $machine_name . ' class="' . $machine_name . '"></' . $machine_name . '>';
-    }
+    $build = parent::build();
+    $build['#markup'] = VueMarkup::create('<' . $machine_name . ' class="' . $machine_name . '">' . $template . '</' . $machine_name . '>');
 
     return $build;
   }
@@ -59,7 +55,6 @@ class VueBlock extends PdbBlock {
 
     $framework_libraries = array(
       'pdb_vue/vue',
-      'pdb_vue/components',
     );
 
     $libraries = array(
