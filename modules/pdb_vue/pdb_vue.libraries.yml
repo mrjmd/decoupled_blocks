@@ -1,0 +1,7 @@
+vue:
+  version: VERSION
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.min.js: {type: external, minified: true}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings

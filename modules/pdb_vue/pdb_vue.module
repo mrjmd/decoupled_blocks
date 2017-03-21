@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Any procedural Vue PHP work lives here.
+ */
+
+
+/**
+ * Add our component paths for Vue.
+ *
+ * @param object $components
+ */
+function pdb_vue_component_info_alter($components) {
+  // Read info files for each module.
+  foreach ($components as $key => $component) {
+    // Set component path if it hasn't been hardcoded.
+    if ($component->info['presentation'] == 'vue' && empty($component->info['path'])) {
+      $component->info['path'] = $component->getPath();
+    }
+  }
+}

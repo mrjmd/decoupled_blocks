@@ -1,0 +1,7 @@
+name: PDB Vue.js
+type: module
+description: 'Turns on Vue.js framework for use by PDB'
+package: PDB
+core: '8.x'
+dependencies:
+  - pdb
