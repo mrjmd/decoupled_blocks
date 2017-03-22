@@ -1,0 +1,13 @@
+name: Vue Example 2
+machine_name: vue-example-2
+type: pdb
+description: 'Vue Example Component 2 allowing multiple blocks per page'
+package: Vue
+version: '1.0.0'
+core: '8.x'
+module_status: active
+presentation: vue
+template: template.html
+add_js:
+  footer:
+    'vue-example-2.js': {}

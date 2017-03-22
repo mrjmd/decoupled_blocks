@@ -1,0 +1,49 @@
+vue:
+  remote: https://github.com/vuejs/vue
+  version: 2.2.4
+  license:
+    name: MIT
+    url: https://github.com/vuejs/vue/blob/dev/LICENSE
+    gpl-compatible: true
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.min.js: {type: external, minified: true}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+
+vue.dev:
+  remote: https://github.com/vuejs/vue
+  version: 2.2.4
+  license:
+    name: MIT
+    url: https://github.com/vuejs/vue/blob/dev/LICENSE
+    gpl-compatible: true
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.js: {type: external}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+
+vue.vuex:
+  remote: https://github.com/vuejs/vuex
+  version: 2.2.1
+  license:
+    name: MIT
+    url: https://github.com/vuejs/vuex/blob/dev/LICENSE
+    gpl-compatible: true
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/vuex/2.2.1/vuex.min.js: {type: external, minified: true}
+  dependencies:
+    - pdb_vue/vue
+
+vue.vuex.dev:
+  remote: https://github.com/vuejs/vuex
+  version: 2.2.1
+  license:
+    name: MIT
+    url: https://github.com/vuejs/vuex/blob/dev/LICENSE
+    gpl-compatible: true
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/vuex/2.2.1/vuex.js: {type: external}
+  dependencies:
+    - pdb_vue/vue.dev

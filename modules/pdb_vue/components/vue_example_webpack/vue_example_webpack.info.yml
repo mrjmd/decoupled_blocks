@@ -1,0 +1,12 @@
+name: Vue Example Webpack
+machine_name: vue-example-webpack
+type: pdb
+description: 'Vue Example using Webpack 2 to compile .vue components into a single build.js file'
+package: Vue
+version: '1.0.0'
+core: '8.x'
+module_status: active
+presentation: vue
+add_js:
+  footer:
+    'dist/build.js': {}

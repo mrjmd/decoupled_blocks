@@ -1,0 +1,12 @@
+name: Vue Example
+machine_name: vue-example-1
+type: pdb
+description: 'Vue Example Component 1'
+package: Vue
+version: '1.0.0'
+core: '8.x'
+module_status: active
+presentation: vue
+add_js:
+  footer:
+    'vue-example-1.js': {}

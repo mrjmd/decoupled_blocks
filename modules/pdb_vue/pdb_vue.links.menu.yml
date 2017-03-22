@@ -1,0 +1,5 @@
+pdb_vue.admin_settings:
+  title: 'PDB Vue.js'
+  description: 'Configure PDB Vue.js Settings'
+  route_name: pdb_vue.form
+  parent: 'system.admin_config_services'
