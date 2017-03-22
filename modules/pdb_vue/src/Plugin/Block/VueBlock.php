@@ -69,7 +69,7 @@ class VueBlock extends PdbBlock implements ContainerFactoryPluginInterface {
     }
 
     $build = parent::build();
-    $build['#markup'] = VueMarkup::create('<' . $machine_name . ' class="' . $machine_name . '">' . $template . '</' . $machine_name . '>');
+    $build['#markup'] = VueMarkup::create('<div class="' . $machine_name . '">' . $template . '</div>');
 
     return $build;
   }
