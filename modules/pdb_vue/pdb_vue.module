@@ -20,3 +20,29 @@ function pdb_vue_component_info_alter($components) {
     }
   }
 }
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function pdb_vue_library_info_alter(&$libraries, $extension) {
+  // Only look to progressively decoupled blocks
+  if ($extension !== 'pdb') {
+    return;
+  }
+
+  // Set the production and development library versions of vue.js
+  $prod = 'pdb_vue/vue';
+  $dev = 'pdb_vue/vue.dev';
+
+  // Use the development version of vue.js if set
+  $config_settings = \Drupal::config('pdb_vue.settings');
+  if (isset($config_settings) && $config_settings->get('development_mode')) {
+    foreach ($libraries as $component => $params) {
+      if (isset($params['dependencies']) && in_array($prod, $params['dependencies'])) {
+        $key = array_search($prod, $params['dependencies']);
+        $libraries[$component]['dependencies'][$key] = $dev;
+      }
+    }
+  }
+
+}

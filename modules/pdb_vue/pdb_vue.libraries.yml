@@ -1,7 +1,25 @@
 vue:
-  version: VERSION
+  remote: https://github.com/vuejs/vue
+  version: 2.2.4
+  license:
+    name: MIT
+    url: https://github.com/vuejs/vue/blob/dev/LICENSE
+    gpl-compatible: true
   js:
     //cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.min.js: {type: external, minified: true}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+
+vue.dev:
+  remote: https://github.com/vuejs/vue
+  version: 2.2.4
+  license:
+    name: MIT
+    url: https://github.com/vuejs/vue/blob/dev/LICENSE
+    gpl-compatible: true
+  js:
+    //cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.js: {type: external}
   dependencies:
     - core/drupal
     - core/drupalSettings
