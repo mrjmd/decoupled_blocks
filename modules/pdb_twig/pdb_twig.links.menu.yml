@@ -1,0 +1,5 @@
+pdb_twig.admin_pdb_twig:
+  title: 'PDB Twig'
+  route_name: pdb_twig.admin_pdb_twig
+  description: 'Configure PDB Twig Settings.'
+  parent: system.admin_config_services

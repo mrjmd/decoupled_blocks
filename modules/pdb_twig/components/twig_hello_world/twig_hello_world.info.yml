@@ -1,0 +1,15 @@
+name: Twig Hello World
+machine_name: twig-hello-world
+type: pdb
+description: 'Provides a hello world component'
+package: PDB Twig
+version: '0.1.0'
+core: '8.x'
+module_status: active
+presentation: twig
+theme:
+  template: twig-hello-world
+add_css:
+  header:
+    component:
+      'twig-hello-world.css': {}

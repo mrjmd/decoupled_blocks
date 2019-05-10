@@ -1,0 +1,16 @@
+# Path admin/config/services/pdb will need to be defined on parent.
+pdb_twig.admin_pdb_twig:
+  path: '/admin/config/services/pdb/pdb_twig'
+  defaults:
+    _form: '\Drupal\pdb_twig\Form\TwigConfigForm'
+    _title: 'PDB Twig'
+  requirements:
+    _permission: 'access administration pages'
+
+pdb_twig.admin_import_translations:
+  path: '/admin/config/services/pdb/import'
+  defaults:
+    _form: '\Drupal\pdb_twig\Form\ImportTranslationsForm'
+    _title: 'Import Translations'
+  requirements:
+    _permission: 'access administration pages'

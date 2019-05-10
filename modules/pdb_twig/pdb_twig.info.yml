@@ -1,0 +1,9 @@
+name: PDB Twig
+type: module
+description: Provides support for twig components over PDB system.
+package: PDB
+version: 8.x-1.0
+configure: pdb_twig.admin_pdb_twig
+core: 8.x
+dependencies:
+  - pdb

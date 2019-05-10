@@ -1,0 +1,14 @@
+name: Twig Lazy Build
+machine_name: twig-lazy-build
+type: pdb
+description: 'Provides a twig-lazy-build component'
+package: PDB Twig
+version: '0.1.0'
+core: '8.x'
+module_status: active
+presentation: twig
+class: Drupal\pdb_twig\twig_lazy_build\TwigLazyBuild
+theme:
+  variables:
+    lazy: ''
+  template: twig-lazy-build
