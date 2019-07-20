@@ -1,0 +1,11 @@
+services:
+  pdb_twig.component_translations_discovery:
+    class: '\Drupal\pdb_twig\ComponentTranslationsDiscovery'
+    arguments:
+      - '@app.root'
+      - '@module_handler'
+      - '@info_parser'
+
+  pdb_twig.component_manager:
+    class: '\Drupal\pdb_twig\ComponentManager'
+    arguments: ['@plugin.manager.block']

@@ -1,0 +1,9 @@
+pdb_twig.admin_pdb_twig:
+  route_name: pdb_twig.admin_pdb_twig
+  base_route: pdb_twig.admin_pdb_twig
+  title: 'Settings'
+
+pdb_twig.admin_import_translations:
+  route_name: pdb_twig.admin_import_translations
+  base_route: pdb_twig.admin_pdb_twig
+  title: 'Import Translations'

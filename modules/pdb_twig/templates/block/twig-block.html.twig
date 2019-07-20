@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - derivative_plugin_id: The ID of the block implementation.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ *
+ * @see template_preprocess_twig_block()
+ */
+#}
+
+<{{ derivative_plugin_id }} {{ attributes }}>
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</{{ derivative_plugin_id }}>

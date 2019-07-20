@@ -1,0 +1,128 @@
+<?php
+
+/**
+ * @file
+ * Code for the PDB Twig module.
+ */
+
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Block\BlockPluginInterface;
+
+/**
+ * Implements hook_theme().
+ *
+ * Provide theme definitions for each twig component that provides a theme.
+ */
+function pdb_twig_theme() {
+  $items = [];
+  $prefix = \Drupal\pdb_twig\Plugin\Block\TwigBlock::THEME_PREFIX;
+
+  $discovery = \Drupal::service('pdb.component_discovery');
+  $components = $discovery->getComponents();
+
+  foreach ($components as $component) {
+    if ($component->info['presentation'] !== 'twig') {
+      continue;
+    }
+
+    // Only create theme definition if theme is an existing array.
+    if (!isset($component->info['theme']) || !is_array($component->info['theme'])) {
+      continue;
+    }
+
+    $theme_default = [
+      'variables' => [],
+      'path' => $component->getPath(),
+    ];
+
+    $machine_name = $component->info['machine_name'];
+    $items[$prefix . $machine_name] = $component->info['theme'] + $theme_default;
+  }
+
+  // Define themes for blocks holding twig components.
+  $module_path = \Drupal::service('module_handler')->getModule('pdb_twig')->getPath();
+  $twig_block_defaults = [
+    'render element' => 'elements',
+    'path' => $module_path . '/templates/block',
+  ];
+
+  $items['twig_block'] = [
+    'template' => 'twig-block',
+  ] + $twig_block_defaults;
+
+  $items['twig_block_full'] = [
+    'template' => 'twig-block--full',
+  ] + $twig_block_defaults;
+
+  return $items;
+}
+
+/**
+ * Implements hook_locale_translation_projects_alter().
+ *
+ * Allows to discover twig components as translation capable projects.
+ */
+function pdb_twig_locale_translation_projects_alter(&$projects) {
+  $discovery = \Drupal::service('pdb_twig.component_translations_discovery');
+  $projects += $discovery->getComponentTranslations();
+}
+
+/**
+ * Impelements hook_block_view_twig_component_alter().
+ */
+function pdb_twig_block_view_twig_component_alter(array &$build, BlockPluginInterface $block) {
+  // Change the block build #theme to use own block template.
+  $block_full = \Drupal::config('pdb_twig.settings')->get('block_full');
+  $build['#theme'] = $block_full ? 'twig_block_full' : 'twig_block';
+}
+
+/**
+ * Prepares variables for twig_block templates.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the properties of the element.
+ *     Properties used: #block, #configuration, #children, #plugin_id.
+ */
+function template_preprocess_twig_block(&$variables) {
+  $variables['derivative_plugin_id'] = str_replace('_', '-', $variables['elements']['#derivative_plugin_id']);
+  $variables['content'] = $variables['elements']['content'];
+
+  // Create a valid HTML ID and make sure it is unique.
+  if (!empty($variables['elements']['#id'])) {
+    $variables['attributes']['id'] = Html::getUniqueId('block-' . $variables['elements']['#id']);
+  }
+}
+
+/**
+ * Prepares variables for twig_block_full templates.
+ *
+ * Copied from core/modules/block/block.module.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the properties of the element.
+ *     Properties used: #block, #configuration, #children, #plugin_id.
+ */
+function template_preprocess_twig_block_full(&$variables) {
+  $variables['configuration'] = $variables['elements']['#configuration'];
+  $variables['derivative_plugin_id'] = str_replace('_', '-', $variables['elements']['#derivative_plugin_id']);
+  $variables['label'] = !empty($variables['configuration']['label_display']) ? $variables['configuration']['label'] : '';
+  $variables['content'] = $variables['elements']['content'];
+  // A block's label is configuration: it is static. Allow dynamic labels to be
+  // set in the render array.
+  if (isset($variables['elements']['content']['#title']) && !empty($variables['configuration']['label_display'])) {
+    $variables['label'] = $variables['elements']['content']['#title'];
+  }
+
+  // Create a valid HTML ID and make sure it is unique.
+  if (!empty($variables['elements']['#id'])) {
+    $variables['attributes']['id'] = Html::getUniqueId('block-' . $variables['elements']['#id']);
+  }
+
+  // Proactively add aria-describedby if possible to improve accessibility.
+  if ($variables['label'] && isset($variables['attributes']['role'])) {
+    $variables['title_attributes']['id'] = Html::getUniqueId($variables['label']);
+    $variables['attributes']['aria-describedby'] = $variables['title_attributes']['id'];
+  }
+}

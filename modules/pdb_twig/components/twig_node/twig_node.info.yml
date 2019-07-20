@@ -1,0 +1,16 @@
+name: Twig Node
+machine_name: twig-node
+type: pdb
+description: 'Provides a twig-node component'
+package: PDB Twig
+version: '0.1.0'
+core: '8.x'
+module_status: active
+presentation: twig
+contexts:
+  entity: node
+class: Drupal\pdb_twig\twig_node\TwigNode
+theme:
+  variables:
+    title: ''
+  template: twig-node
