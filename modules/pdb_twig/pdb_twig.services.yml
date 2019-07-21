@@ -8,4 +8,4 @@ services:
 
   pdb_twig.component_manager:
     class: '\Drupal\pdb_twig\ComponentManager'
-    arguments: ['@plugin.manager.block']
+    arguments: ['@plugin.manager.block', '@request_stack']
