@@ -55,7 +55,6 @@ class ComponentDiscovery extends ExtensionDiscovery implements ComponentDiscover
     $defaults = array(
       'dependencies' => array(),
       'description' => '',
-      'package' => 'Other',
       'version' => NULL,
     );
 
