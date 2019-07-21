@@ -48,7 +48,11 @@ class TwigBlockDeriver extends PdbBlockDeriver {
         if (empty($this->derivatives[$block_id]['context'])) {
           $twig_definitions[$block_id]['context'] = [];
         }
-        $twig_definitions[$block_id]['context']['pdb_hidden'] = new TwigContextDefinition('pdb:hidden');
+        $context_def = new TwigContextDefinition('pdb:hidden');
+        // Set a defualt value so it will not fail when creating instances
+        // with the component manager service.
+        $context_def->setDefaultValue('hidden');
+        $twig_definitions[$block_id]['context']['pdb_hidden'] = $context_def;
       }
 
       // Add the path to the component.
