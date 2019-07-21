@@ -27,6 +27,20 @@ class TwigBlock extends PdbBlock {
     $build = parent::build();
 
     $info = $this->getComponentInfo();
+    $machine_name = $info['machine_name'];
+
+    if (isset($info['class'])) {
+      // This requires the class to be avialable under Psr-4.
+      // This can be done by using composer.json autoload.
+      // TODO: check if there is another way to support this.
+      $class = $info['class'];
+      $build = $class::build($build, $this->configuration);
+
+      // Allow a block do not render by returning an empty array.
+      if (empty($build)) {
+        return [];
+      }
+    }
 
     if (isset($info['theme'])) {
       if (is_array($info['theme'])) {
@@ -38,14 +52,6 @@ class TwigBlock extends PdbBlock {
       }
 
       $build['#theme'] = $theme;
-    }
-
-    if (isset($info['class'])) {
-      // This requires the class to be avialable under Psr-4.
-      // This can be done by using composer.json autoload.
-      // TODO: check if there is another way to support this.
-      $class = $info['class'];
-      $build = $class::build($build, $this->configuration);
     }
 
     return $build;
