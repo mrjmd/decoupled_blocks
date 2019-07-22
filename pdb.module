@@ -52,17 +52,11 @@ function pdb_library_info_build() {
     // Build a library to include assets in header.
     if (!empty($library_header)) {
       $library_header['header'] = TRUE;
-      // Add dependency on presentation library.
-      $pres = $info['presentation'];
-      $library_header['dependencies'] = array('pdb_' . $pres . '/' . $pres);
       $libraries += [$info['machine_name'] . '/header' => $library_header];
     }
 
     // Build a library to include assets in footer.
     if (!empty($library_footer)) {
-      // Add dependency on presentation library.
-      $pres = $info['presentation'];
-      $library_footer['dependencies'] = array('pdb_' . $pres . '/' . $pres);
       $libraries += [$info['machine_name'] . '/footer' => $library_footer];
     }
   }
