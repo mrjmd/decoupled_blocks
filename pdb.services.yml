@@ -3,5 +3,6 @@ services:
     class: '\Drupal\pdb\ComponentDiscovery'
     arguments:
       - '@app.root'
-      - '@module_handler'
+      - '@event_dispatcher'
       - '@info_parser'
+      - '@module_handler'
