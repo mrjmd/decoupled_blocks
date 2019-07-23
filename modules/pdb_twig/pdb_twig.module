@@ -70,7 +70,7 @@ function pdb_twig_locale_translation_projects_alter(&$projects) {
 /**
  * Impelements hook_block_view_twig_component_alter().
  */
-function cs_pdb_twig_block_view_twig_component_alter(array &$build, BlockPluginInterface $block) {
+function pdb_twig_block_view_twig_component_alter(array &$build, BlockPluginInterface $block) {
   // Consider a block has no content if only has content and #cache keys.
   $build_content = array_diff(array_keys($build), ['content', '#cache']);
   if (empty($build_content)) {
