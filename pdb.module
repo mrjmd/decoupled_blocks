@@ -49,6 +49,25 @@ function pdb_library_info_build() {
       }
     }
 
+    if (isset($info['add_dependencies'])) {
+      // This can not support libraries that only require dependencies but do
+      // not add any css or js asset because a core limitation.
+      // See https://www.drupal.org/project/drupal/issues/2905429.
+      if (isset($info['add_dependencies']['header']) && !empty($library_header)) {
+        $library_header['dependencies'] = [];
+        foreach ($info['add_dependencies']['header'] as $library) {
+          $library_header['dependencies'][] = $library;
+        }
+      }
+
+      if (isset($info['add_dependencies']['footer']) && !empty($library_footer)) {
+        $library_footer['dependencies'] = [];
+        foreach ($info['add_dependencies']['footer'] as $library) {
+          $library_footer['dependencies'][] = $library;
+        }
+      }
+    }
+
     // Build a library to include assets in header.
     if (!empty($library_header)) {
       $library_header['header'] = TRUE;
