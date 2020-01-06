@@ -16,7 +16,7 @@ function pdb_library_info_build() {
 
   foreach ($components as $component) {
     $info = $component->info;
-    $path = $component->subpath;
+    $path = $component->getPath();
 
     $library_header = [];
     $library_footer = [];
