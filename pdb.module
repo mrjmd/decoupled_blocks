@@ -77,16 +77,29 @@ function _pdb_library_build_css($info, $path) {
   $css_assets = [];
 
   if (isset($info['add_css']['header'])) {
-    foreach ($info['add_css']['header'] as $group => $css) {
+    // Supports current simplest method to add css assets to the library.
+    if (!isset($info['add_css']['header']['css'])) {
+      // This assumes add_css -> header contains the assets.
+      $info['add_css']['header'] = ['css' => $info['add_css']['header']];
+    }
+
+    foreach ($info['add_css']['header']['css'] as $group => $css) {
       $header_css = _pdb_library_build_get_assets($css, $path, $group);
-      $css_assets['header'] = ['css' => $header_css];
+      $info['add_css']['header']['css'] = $header_css;
+      $css_assets['header'] = $info['add_css']['header'];
     }
   }
 
   if (isset($info['add_css']['footer'])) {
-    foreach ($info['add_css']['footer'] as $group => $css) {
+    if (!isset($info['add_css']['footer']['css'])) {
+      // This assumes add_css -> footer contains the assets.
+      $info['add_css']['footer'] = ['css' => $info['add_css']['footer']];
+    }
+
+    foreach ($info['add_css']['footer']['css'] as $group => $css) {
       $footer_css = _pdb_library_build_get_assets($css, $path, $group);
-      $css_assets['footer'] = ['css' => $footer_css];
+      $info['add_css']['footer']['css'] = $footer_css;
+      $css_assets['footer'] = $info['add_css']['footer'];
     }
   }
 
@@ -100,13 +113,26 @@ function _pdb_library_build_js($info, $path) {
   $js_assets = [];
 
   if (isset($info['add_js']['header'])) {
-    $header_js = _pdb_library_build_get_assets($info['add_js']['header'], $path);
-    $js_assets['header'] = ['js' => $header_js];
+    // Supports current simplest method to add js assets to the library.
+    if (!isset($info['add_js']['header']['js'])) {
+      // This assumes add_js -> header contains the assets.
+      $info['add_js']['header'] = ['js' => $info['add_js']['header']];
+    }
+
+    $header_js = _pdb_library_build_get_assets($info['add_js']['header']['js'], $path);
+    $info['add_js']['header']['js'] = $header_js;
+    $js_assets['header'] = $info['add_js']['header'];
   }
 
   if (!empty($info['add_js']['footer'])) {
-    $footer_js = _pdb_library_build_get_assets($info['add_js']['footer'], $path);
-    $js_assets['footer'] = ['js' => $footer_js];
+    if (!isset($info['add_js']['footer']['js'])) {
+      // This assumes add_js -> footer contains the assets.
+      $info['add_js']['footer'] = ['js' => $info['add_js']['footer']];
+    }
+
+    $footer_js = _pdb_library_build_get_assets($info['add_js']['footer']['js'], $path);
+    $info['add_js']['footer']['js'] = $footer_js;
+    $js_assets['footer'] = $info['add_js']['footer'];
   }
   return $js_assets;
 }
