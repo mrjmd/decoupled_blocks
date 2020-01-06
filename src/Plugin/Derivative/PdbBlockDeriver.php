@@ -50,6 +50,12 @@ class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
       $this->derivatives[$block_id]['info'] = $block_info->info;
       $this->derivatives[$block_id]['admin_label'] = $block_info->info['name'];
       $this->derivatives[$block_id]['cache'] = array('max-age' => 0);
+
+      // Only set category if package is set, defaults to provider if not.
+      if (isset($block_info->info['package'])){
+        $this->derivatives[$block_id]['category'] =$block_info->info['package'];
+      }
+
       if (isset($block_info->info['contexts'])) {
         $this->derivatives[$block_id]['context'] = $this->createContexts($block_info->info['contexts']);
       }
