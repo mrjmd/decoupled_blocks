@@ -71,16 +71,21 @@ class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
    *
    * @return \Drupal\Core\Plugin\Context\ContextDefinition[]
    *   Array of context to be used by block module
-   *
-   * @todo where is this defined in block module
    */
   protected function createContexts(array $contexts) {
     $contexts_definitions = [];
-    if (isset($contexts['entity'])) {
-      // @todo Check entity type exists and fail!
-      $contexts_definitions['entity'] = new ContextDefinition('entity:' . $contexts['entity']);
+
+    // Support for old node entity context defintion.
+    // "entity: node" should now be defined "entity: entity:node".
+    if (isset($contexts['entity']) && $contexts['entity'] === 'node') {
+      // For some reason even if context_id is "node" it must be set "entity".
+      $contexts['entity'] = 'entity:node';
     }
-    // @todo Dynamically handle unknown context definitions
+
+    foreach ($contexts as $context_id => $context_type) {
+      $contexts_definitions[$context_id] = new ContextDefinition($context_type);
+    }
+
     return $contexts_definitions;
   }
 
