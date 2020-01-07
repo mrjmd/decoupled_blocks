@@ -4,3 +4,23 @@
  * @file
  * React helpers.
  */
+
+/**
+ * Implements hook_component_library_build_alter().
+ */
+function pdb_react_component_library_build_alter(&$library, $component) {
+  // Only process libraries for "react" presentation components.
+  $presentation = $component->info['presentation'];
+  if ($presentation !== 'react') {
+    return;
+  }
+
+  // Add dependency on main react library.
+  if (!empty($library['header'])) {
+    $library['header']['dependencies'] = ['pdb_' . $presentation . '/' . $presentation];
+  }
+
+  if (!empty($library['footer'])) {
+    $library['footer']['dependencies'] = ['pdb_' . $presentation . '/' . $presentation];
+  }
+}
