@@ -4,32 +4,3 @@
  * @file
  * Any procedural Angular 2 PHP work lives here.
  */
-
-
-/**
- * Add our component paths for Angular 2.
- *
- * @param object $components
- */
-function pdb_ng2_component_info_alter($components) {
-  // Read info files for each module.
-  foreach ($components as $key => $component) {
-    // Set component path if it hasn't been hardcoded.
-    if ($component->info['presentation'] == 'ng2' && empty($component->info['path'])) {
-      // Use js or ts sourcing depending on development mode.
-      $config_settings = \Drupal::config('pdb_ng2.settings');
-      $ext = 'js';
-      if (isset($config_settings) && $config_settings->get('development_mode')) {
-        $ext = 'ts';
-      }
-      $component->info['path'] = $component->getPath();
-    }
-    else {
-      $path = isset($component->info['path']) ? $component->info['path'] : '';
-      if ($path{0} != '/') {
-        $component->info['path'] = $component->getPath() . '/' . $path;
-      }
-    }
-
-  }
-}
