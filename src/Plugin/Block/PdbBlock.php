@@ -70,9 +70,15 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
       $attached = array_merge_recursive($attached, $header);
     }
 
-    if ($contexts = $this->getContexts()) {
-      $attached['drupalSettings']['pdb']['contexts'] = $this->getJsContexts($contexts);
+    $contexts = $this->getContexts();
+    if ($contexts) {
+      $contexts_values = $this->getContextsValues($contexts);
+      $this->configuration['contexts'] = $contexts_values;
+
+      $js_contexts = $this->getJsContexts($contexts_values);
+      $attached['drupalSettings']['pdb']['contexts'] = $js_contexts;
     }
+
     if (isset($this->configuration['pdb_configuration'])) {
       // @todo Is there anything else unique to key off of besides uuid
       $attached['drupalSettings']['pdb']['configuration'][$this->configuration['uuid']] = $this->configuration['pdb_configuration'];
@@ -141,21 +147,48 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
   }
 
   /**
-   * Add serialized entity to the JS Contexts.
+   * Get the value of contexts.
+   *
+   * @param \Drupal\Component\Plugin\Context\ContextInterface[] $contexts
+   *   The contexts to get value.
+   *
+   * @return array
+   *   An array of contexts values.
+   */
+  protected function getContextsValues(array $contexts) {
+    $context_values = [];
+    foreach ($contexts as $key => $context) {
+      $data = $context->getContextData();
+      if ($data instanceof EntityAdapter) {
+        $this->addEntityContextValue($data, $context_values, $key);
+      }
+      else {
+        // Get the data value otherwise.
+        // TODO: Will this cover all the cases?
+        $context_values[$key] = $data->getValue();
+      }
+    }
+
+    return $context_values;
+  }
+
+  /**
+   * Add entity context value (entity object) to context values.
    *
    * @param \Drupal\Core\Entity\Plugin\DataType\EntityAdapter $data
-   *   The entity to serialize.
-   * @param array $js_contexts
-   *   The full array of JS contexts.
+   *   The context data.
+   * @param array $context_values
+   *   An array with context values.
    * @param string $key
    *   The context key.
    */
-  protected function addEntityJsContext(EntityAdapter $data, array &$js_contexts, $key) {
+  protected function addEntityContextValue(EntityAdapter $data, array &$context_values, $key) {
     $entity = $data->getValue();
     $entity_access = $entity->access('view', NULL, TRUE);
     if (!$entity_access->isAllowed()) {
       return;
     }
+
     foreach ($entity as $field_name => $field) {
       // @var \Drupal\Core\Field\FieldItemListInterface $field
       $field_access = $field->access('view', NULL, TRUE);
@@ -166,13 +199,13 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
       }
     }
 
-    $js_contexts["$key:" . $entity->getEntityTypeId()] = $entity->toArray();
+    $context_values["$key:" . $entity->getEntityTypeId()] = $entity;
   }
 
   /**
    * Get an array of serialized JS contexts.
    *
-   * @param \Drupal\Component\Plugin\Context\ContextInterface[] $contexts
+   * @param array $contexts
    *   The contexts to serialize.
    *
    * @return array
@@ -181,9 +214,13 @@ abstract class PdbBlock extends BlockBase implements FrameworkAwareBlockInterfac
   protected function getJsContexts(array $contexts) {
     $js_contexts = [];
     foreach ($contexts as $key => $context) {
-      $data = $context->getContextData();
-      if ($data instanceof EntityAdapter) {
-        $this->addEntityJsContext($data, $js_contexts, $key);
+      if (is_object($context) && method_exists($context, 'toArray')) {
+        // Get the array version of the entity context.
+        $js_contexts[$key] = $context->toArray();
+      }
+      else {
+        // Leave the context as it is otherwise.
+        $js_contexts[$key] = $context;
       }
     }
     return $js_contexts;
