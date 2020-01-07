@@ -6,3 +6,9 @@ services:
       - '@event_dispatcher'
       - '@info_parser'
       - '@module_handler'
+
+  pdb.component_library_manager:
+    class: '\Drupal\pdb\ComponentLibraryManager'
+    arguments:
+      - '@pdb.component_discovery'
+      - '@module_handler'
