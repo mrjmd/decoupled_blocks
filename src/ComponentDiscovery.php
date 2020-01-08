@@ -91,6 +91,9 @@ class ComponentDiscovery extends ExtensionDiscovery implements ComponentDiscover
     foreach ($components as $key => $component) {
       // Look for the info file.
       $component->info = $this->infoParser->parse($component->getPathname());
+      // Make component path available for block plugins (eg. ReactBlock).
+      $component->info['path'] = $component->getPath();
+
       // Merge in defaults and save.
       $components[$key]->info = $component->info + $defaults;
     }
