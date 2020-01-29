@@ -9,4 +9,5 @@ module_status: active
 presentation: react
 add_js:
   footer:
-    'react-example-1.js': {}
+    'react-example-1.js': { preprocess: 0, attributes: { type: text/babel } }
+
