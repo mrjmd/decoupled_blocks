@@ -1,8 +1,9 @@
 react:
   version: VERSION
   js:
-    //cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.min.js: {type: external, minified: true}
-    //cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.min.js: {type: external, minified: true}
+    //unpkg.com/react@16/umd/react.production.min.js: {type: external, minified: true}
+    //unpkg.com/react-dom@16/umd/react-dom.production.min.js: {type: external, minified: true}
+    //unpkg.com/@babel/standalone/babel.min.js: {type: external, minified: true}
   dependencies:
     - core/drupal
     - core/drupalSettings
