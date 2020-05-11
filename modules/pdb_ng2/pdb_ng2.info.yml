@@ -3,6 +3,6 @@ type: module
 description: 'Turns on Angular 2 framework for use by PDB'
 package: PDB
 configure: pdb_ng2.form
-core: '8.x'
+core_version_requirement: ^8 || ^9
 dependencies:
   - pdb
