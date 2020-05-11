@@ -3,6 +3,8 @@
 namespace Drupal\pdb\Event;
 
 use Symfony\Component\EventDispatcher\Event;
+// TODO: replace when ready for Drupal 9.
+// use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Provides an event to handle user custom discovery paths.

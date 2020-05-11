@@ -2,4 +2,4 @@ name: Progressively Decoupled Blocks (PDB)
 type: module
 description: 'Build stuff with javascript frameworks as blocks.'
 package: PDB
-core: '8.x'
+core_version_requirement: ^8 || ^9

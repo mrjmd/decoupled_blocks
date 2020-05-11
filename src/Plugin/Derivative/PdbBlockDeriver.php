@@ -57,7 +57,7 @@ class PdbBlockDeriver extends DeriverBase implements ContainerDeriverInterface {
       }
 
       if (isset($block_info->info['contexts'])) {
-        $this->derivatives[$block_id]['context'] = $this->createContexts($block_info->info['contexts']);
+        $this->derivatives[$block_id]['context_definitions'] = $this->createContexts($block_info->info['contexts']);
       }
     }
     return $this->derivatives;
